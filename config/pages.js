@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Multiple pages
-const templatePath = path.resolve(__dirname, '../../src/views/pages');
+const templatePath = path.resolve(__dirname, '../src/views/pages');
 
 const pages = fs
   .readdirSync(templatePath)
@@ -14,18 +14,10 @@ const multiPages = pages.map((page) => {
   return new HtmlWebpackPlugin({
     template: `${templatePath}/${page}.pug`,
     filename: `${page}.html`,
+    scriptLoading: 'blocking', //default 'defer'
     inject: true,
+    // publicPath: '../', // resolve las rutas de importaciones
   });
 });
 
-module.exports = {
-  pugRules: {
-    test: /\.pug$/,
-    loader: 'pug-loader',
-    options: {
-      pretty: true,
-      self: true,
-    },
-  },
-  multiPages,
-};
+module.exports = multiPages;

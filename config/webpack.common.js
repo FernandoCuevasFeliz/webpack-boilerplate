@@ -1,24 +1,22 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-// importing rules
-const { multiPages, pugRules } = require('./rules/pug.rules');
-const jsRules = require('./rules/js.rules');
-const styleRules = require('./rules/style.rules');
-const imageRules = require('./rules/image.rules');
-const fileRules = require('./rules/file.rules');
+const LOADERS = require('./loaders');
+const PAGES = require('./pages');
 
-const rules = [pugRules, jsRules, styleRules, imageRules, fileRules];
 module.exports = {
-  entry: './src/js/index.js',
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, '../public'),
     filename: 'js/script.min.js',
+    path: path.resolve(__dirname, '../public'),
     publicPath: '',
+    clean: true,
   },
-  module: { rules },
+
   resolve: {
-    extensions: ['.js', '.json', '.pug'],
+    extensions: ['.js', '.ts'],
   },
-  plugins: [new CleanWebpackPlugin()].concat(multiPages),
+  module: { rules: LOADERS },
+
+  plugins: [new CleanWebpackPlugin(), ...PAGES],
 };
