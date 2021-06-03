@@ -8,13 +8,19 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: /\.(css|scss|sass)$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset',
+        generator: {
+          filename: 'assets/img/[hash][ext][query]',
+        },
+      },
+
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|mp4|mp3|txt|xml|pdf)$/i,
+        type: 'asset',
+        generator: {
+          filename: 'assets/[path][hash][ext][query]',
+        },
       },
     ],
   },

@@ -1,8 +1,5 @@
-// JS
-import './js/app';
-
-// SCSS
+// CSS|SCSS
 import './scss/styles.scss';
 
-// images
-import icon from './assets/img/icon.jpg';
+// JS|TS
+import './js/app';

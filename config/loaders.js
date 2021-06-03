@@ -86,8 +86,9 @@ const loaders = [
   {
     test: /\.(png|svg|jpg|jpeg|gif)$/i,
     type: 'asset',
+    use: [IMAGE_WEBPACK_LOADER],
     generator: {
-      filename: 'assets/img/[hash][ext][query]',
+      filename: 'assets/img/[name][ext][query]',
     },
   },
 
@@ -95,7 +96,7 @@ const loaders = [
     test: /\.(woff|woff2|eot|ttf|otf|mp4|mp3|txt|xml|pdf)$/i,
     type: 'asset',
     generator: {
-      filename: 'assets/[path][hash][ext][query]',
+      filename: 'assets/[path][name][ext][query]',
     },
   },
 ];
